@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinic Queue Management</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Optional: PWA manifest -->
+    <link rel="manifest" href="manifest.json">
+    <!-- Optional: Favicon -->
+    <link rel="icon" type="image/png" href="assets/icon.png">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-hospital-alt"></i> Clinic Queue Management</h1>
+            <p class="subtitle">Manage patient queues with voice announcements</p>
+        </header>
+        
+        <div class="main-content">
+            <!-- Left Column -->
+            <div>
+                <!-- Add Patient Form -->
+                <div class="card">
+                    <h2><i class="fas fa-user-plus"></i> Add Patient</h2>
+                    <div class="input-group">
+                        <label for="patient-name">Patient Name *</label>
+                        <input type="text" id="patient-name" placeholder="Enter patient name" autofocus>
+                    </div>
+                    <div class="input-group">
+                        <label for="counter-name">Counter *</label>
+                        <input type="text" id="counter-name" placeholder="Counter number or name">
+                    </div>
+                    <button id="add-patient" class="btn btn-primary btn-block">
+                        <i class="fas fa-plus-circle"></i> Add to Queue
+                    </button>
+                </div>
+                
+                <!-- Waiting List -->
+                <div class="card">
+                    <h2>
+                        <i class="fas fa-list"></i> Waiting List
+                        <span id="waiting-count" class="queue-number">0</span>
+                    </h2>
+                    <div id="waiting-list" class="list-container">
+                        <div class="empty-state">
+                            <i class="fas fa-users"></i>
+                            <p>No patients waiting</p>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button id="call-next" class="btn btn-success">
+                            <i class="fas fa-bullhorn"></i> Call Next
+                        </button>
+                        <button id="clear-all" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Clear All
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column -->
+            <div>
+                <!-- Currently Calling -->
+                <div class="card" id="currently-calling">
+                    <h2><i class="fas fa-bullhorn"></i> Currently Calling</h2>
+                    <div id="calling-display" class="calling-display">
+                        <div class="empty-state">
+                            <i class="fas fa-user-clock"></i>
+                            <p>No patient being called</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Voice Controls -->
+                <div class="card">
+                    <div class="collapsible-header">
+                        <h2><i class="fas fa-volume-up"></i> Voice Settings</h2>
+                        <button id="toggle-voice-controls" class="toggle-btn">
+                            <i class="fas fa-chevron-down"></i> Advanced
+                        </button>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="voice-select">Select Voice</label>
+                        <select id="voice-select">
+                            <option value="">Loading voices...</option>
+                        </select>
+                    </div>
+                    
+                    <div id="advanced-voice-controls" class="collapsible-content collapsed">
+                        <div class="voice-controls">
+                            <div class="input-group">
+                                <label for="volume">Volume</label>
+                                <input type="range" id="volume" min="0" max="1" step="0.1" value="1">
+                            </div>
+                            <div class="input-group">
+                                <label for="rate">Speech Rate</label>
+                                <input type="range" id="rate" min="0.5" max="2" step="0.1" value="1">
+                            </div>
+                        </div>
+                        <div class="controls-row">
+                            <button id="test-voice" class="btn btn-primary">
+                                <i class="fas fa-play"></i> Test Voice
+                            </button>
+                            <button id="stop-voice" class="btn">
+                                <i class="fas fa-stop"></i> Stop
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Statistics -->
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="total-called">0</div>
+                <div class="stat-label">Called Today</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="waiting-total">0</div>
+                <div class="stat-label">Waiting Now</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="total-patients">0</div>
+                <div class="stat-label">Total Patients</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="total-recalls">0</div>
+                <div class="stat-label">Total Recalls</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Local audio file -->
+    <audio id="chime-sound" preload="auto">
+        <source src="assets/chime.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -13,7 +13,7 @@ A web-based queue management system for clinics with voice announcement capabili
 
 ## Live Demo
 
-[View on GitHub Pages](https://your-username.github.io/clinic-queue-system/)
+[View on GitHub Pages][(https://your-username.github.io/clinic-queue-system/)](https://spd3ictpro.github.io/clinic-announcer-system/)
 
 ## How to Use
 
